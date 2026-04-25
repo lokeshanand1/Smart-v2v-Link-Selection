@@ -1,0 +1,6 @@
+distance,predicted_link,rationale
+50.0,Hybrid (RF + VLC),Optimal distance and clear weather for bandwidth aggregation.
+120.0,Radio Frequency (RF),Distance exceeds reliable VLC range; RF ensures connectivity.
+30.0,Radio Frequency (RF),Severe fog (beta=2.5) blocks VLC; RF provides robust failover.
+180.0,Radio Frequency (RF),High distance and heavy rain make RF the only reliable choice.
+15.0,Visible Light (VLC),Short range and clear conditions allow for high-speed light communication.

@@ -1,86 +1,448 @@
-# RF-VLC Hybrid V2V System
+# Smart V2V Link Selection  
+### Intelligent RF-VLC Hybrid Communication Framework for Autonomous Vehicles using Machine Learning & Utility Optimization
 
-## Intelligent Vehicular Communication System
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![MATLAB](https://img.shields.io/badge/MATLAB-Simulation-orange)
+![Machine Learning](https://img.shields.io/badge/ML-RandomForest%20%7C%20XGBoost-green)
+![Streamlit](https://img.shields.io/badge/Deployment-Streamlit-red)
+![Research](https://img.shields.io/badge/IEEE-Research%20Project-purple)
 
-**Status:** Production-Ready  
-**Domain:** Intelligent Transportation Systems (ITS), Machine Learning, Wireless Communications
+---
 
-### 📌 Problem Statement
+## Project Overview
 
-Modern Vehicle-to-Vehicle (V2V) communication systems demand ultra-reliable, low-latency connectivity to ensure autonomous safety and traffic coordination. Single-channel networks face severe limitations:
-- **Why RF Fails:** Radio Frequency (RF) systems suffer from spectrum congestion, interference, and high latency in dense traffic scenarios.
-- **Why VLC Fails:** Visible Light Communication (VLC) provides massive bandwidth and security but is highly susceptible to weather conditions (fog, rain, snow) and requires strict Line-of-Sight (LOS).
-- **Why Hybrid Works:** A hybrid architecture leverages the robustness of RF for long-distance and adverse weather conditions, combined with the high-speed, secure data transfer of VLC for short-distance, clear-weather scenarios.
+Modern autonomous vehicles require **ultra-reliable low-latency communication** for:
 
-This project implements an intelligent, machine-learning-driven routing system that dynamically selects the optimal communication link (RF, VLC, or Hybrid) based on real-time environmental data (weather, mobility, distance).
+- Collision avoidance  
+- Cooperative driving  
+- Smart traffic systems  
+- Autonomous navigation  
 
-### 📐 System Architecture
+Traditional communication systems struggle under real-world conditions:
 
-```mermaid
-graph TD
-    A[Environment Input] --> B(Sensors: Distance, Speed, Weather)
-    B --> C{Decision Engine}
-    
-    C -->|Short Distance / Clear| D[VLC Link]
-    C -->|Long Distance / Adverse Weather| E[RF Link]
-    C -->|Optimal Conditions| F[Hybrid Aggregation]
-    
-    D --> G[Data Transmission]
-    E --> G
-    F --> G
-    
-    G --> H[Evaluation & Metrics]
+### RF Problems
+- Spectrum congestion  
+- Co-channel interference  
+- Limited bandwidth  
+- Performance degradation in dense traffic  
+
+### VLC Problems
+- Fog attenuation  
+- Rain attenuation  
+- LOS blockage  
+- Distance degradation  
+
+To solve this problem, this project introduces an **intelligent hybrid communication framework** that dynamically selects between:
+
+- RF Communication  
+- VLC Communication  
+- Hybrid Link Aggregation  
+
+using:
+
+- Physics-based channel modeling  
+- Utility optimization  
+- Machine learning prediction  
+
+---
+
+# System Architecture
+
+![Architecture](docs/images/system_architecture.png)
+
+---
+
+# Workflow
+
+```text
+Vehicle Parameters
+    ↓
+Synthetic Dataset Generation
+    ↓
+RF Channel Modeling
+    ↓
+VLC Channel Modeling
+    ↓
+Hybrid Link Aggregation
+    ↓
+Utility Optimization
+    ↓
+ML Model Training
+    ↓
+Real-Time Link Prediction
 ```
 
-### 🧠 Machine Learning Workflow
+---
 
-1. **Data Generation:** Synthetic dataset generated using MATLAB (`synthetic_dataset_generator.m`), simulating physical layer channel models for RF and VLC.
-2. **Preprocessing:** Python scripts clean data, normalize features, and handle labeling (1=RF, 2=VLC, 3=Hybrid).
-3. **Model Training:** 
-   - Random Forest (Short-range routing logic)
-   - XGBoost (Long-range routing logic)
-   - MLP Neural Network
-4. **Hybrid Strategy:** A rules-based threshold logic (e.g., Distance > 75m) dynamically switches between the optimized RF and XGBoost sub-models.
+# Problem Statement
 
-### 🏆 Results Summary
+Standalone RF and VLC systems fail under dynamic vehicular conditions.
 
-Our Hybrid routing model achieves state-of-the-art performance in optimizing V2V communications:
-- **Accuracy:** `89.46%` across diverse weather scenarios.
-- **Utility Improvement:** `112%` gain in overall network utility compared to standalone RF.
-- **High-Efficiency Uptime:** `89.4%` sustained high-throughput connectivity.
-- **Severe Degradation Reduction:** Latency/outage incidents reduced from `41.6%` (standalone VLC) to just `2.6%`.
+| Problem | RF | VLC |
+|----------|----|------|
+| Fog | Low impact | Severe impact |
+| Rain | Moderate impact | High impact |
+| Long Distance | Moderate | Severe |
+| LOS Blockage | No | Yes |
+| Interference | High | Low |
 
-### 🚀 Installation & Usage
+The objective is to dynamically choose the best communication link under varying environmental conditions.
 
-#### Prerequisites
-- Python 3.8+
-- Requirements listed in `requirements.txt`
+---
 
-#### Setup
-```bash
-git clone https://github.com/yourusername/RF-VLC-Hybrid-V2V-System.git
-cd RF-VLC-Hybrid-V2V-System
-pip install -r requirements.txt
-```
+# Dataset Generation
 
-#### Running the Demo
-Launch the interactive Streamlit app to test real-time predictions:
+A synthetic dataset of **60,000 samples** was created using MATLAB.
+
+### Features
+
+- Inter-vehicle distance  
+- Vehicle speed  
+- Relative speed  
+- Vehicle density  
+- Rain rate  
+- Fog attenuation coefficient  
+- Weather class  
+- LOS probability  
+
+---
+
+# RF Channel Modeling
+
+### Path Loss
+
+\[
+PL = PL_0 + 10n\log_{10}(d) + shadow
+\]
+
+### Rain Attenuation
+
+\[
+SNR_{RF}=SNR_{RF}e^{-0.06r}
+\]
+
+### Gaseous Absorption
+
+\[
+SNR_{RF}=SNR_{RF}e^{-0.02d}
+\]
+
+### Doppler Fading
+
+\[
+SNR_{RF}=SNR_{RF}e^{-v/100}
+\]
+
+---
+
+# VLC Channel Modeling
+
+### Optical Channel Gain
+
+\[
+H=\frac{(m+1)A}{2\pi d^2}
+\]
+
+### Fog Attenuation
+
+\[
+H=He^{-18\beta(d/1000)}
+\]
+
+### LOS Blockage
+
+\[
+P_{LOS}=e^{-kdensity*d/1000}
+\]
+
+### Mobility Misalignment
+
+\[
+SNR_{VLC}=SNR_{VLC}e^{-v/80}
+\]
+
+---
+
+# Hybrid Link Aggregation
+
+The hybrid model combines both RF and VLC dynamically.
+
+### Hybrid Capacity
+
+\[
+C_{HYB}=0.6(C_{RF}+C_{VLC})
+\]
+
+### Hybrid Outage
+
+\[
+P_{out(HYB)}=P_{out(RF)}P_{out(VLC)}
+\]
+
+---
+
+# Utility Optimization
+
+The system maximizes:
+
+\[
+U = w_CC - w_DD - w_OP
+\]
+
+Where:
+
+- C = Capacity  
+- D = Delay  
+- P = Outage Probability  
+
+---
+
+## Fixed Baselines
+
+### Baseline 1
+
+\[
+(0.33,0.33,0.34)
+\]
+
+### Baseline 2
+
+\[
+(0.10,0.80,0.10)
+\]
+
+---
+
+## Optimized Weights
+
+\[
+(0.7,0.2,0.1)
+\]
+
+---
+
+# Machine Learning Models Used
+
+- Random Forest  
+- Decision Tree  
+- XGBoost  
+- MLP Neural Network  
+- Hybrid RF + XGBoost model  
+
+---
+
+# Project Results
+
+---
+
+## Performance Comparison
+
+| Model | Avg Utility | Accuracy |
+|---------|-------------|------------|
+| Fixed Baseline 1 | 0.1258 | 89.42% |
+| Fixed Baseline 2 | 0.0382 | 89.34% |
+| Optimized Model | **0.3548** | **89.46%** |
+
+---
+
+## Final Metrics
+
+| Metric | Value |
+|---------|---------|
+| Accuracy | 89.46% |
+| Precision | 0.897 |
+| Recall | 0.895 |
+| F1 Score | 0.894 |
+| Utility Improvement | 112.1% |
+| High Efficiency Uptime | 89.4% |
+| Severe Degradation Events | 2.6% |
+
+---
+
+# Result Visualizations
+
+## Utility vs Distance
+
+![Utility Distance](results/plots/average%20utility%20vs%20inter%20vehicle%20distance.png)
+
+---
+
+## Utility vs Fog Density (20m)
+
+![Fog20](results/plots/average%20utility%20vs%20beta%20at%2020.png)
+
+---
+
+## Utility vs Fog Density (60m)
+
+![Fog60](results/plots/average%20utility%20vs%20beta%20at%2060.png)
+
+---
+
+## Delay vs Distance
+
+![Delay](results/plots/aveage%20delay%20vs%20distance%20at%200.7.png)
+
+---
+
+## Utility Under Weather Conditions
+
+![Weather](results/plots/utility%20under%20weather.png)
+
+---
+
+## Fixed vs Dynamic Optimization
+
+![Comparison](results/plots/Model_comparison.png)
+
+---
+
+# Streamlit Demo
+
+Run interactive demo:
+
 ```bash
 streamlit run demo/app.py
 ```
 
-#### Training Models
-To reproduce the models from scratch:
-```bash
-cd src
-python hybrid_model.py
-python evaluate.py
-```
+Users can input:
 
-### 🔮 Future Improvements
-- Integration of 5G/6G mmWave modules for enhanced high-frequency testing.
-- Deep Reinforcement Learning (DRL) agent for continuous utility optimization.
-- Real-world testbed deployment using hardware-in-the-loop (HIL) simulations.
+- Distance  
+- Speed  
+- Fog density  
+- Rain rate  
+- Vehicle density  
+
+Output:
+
+- RF  
+- VLC  
+- Hybrid  
 
 ---
-*Developed for advancing intelligent vehicular communications and reliable autonomous networks.*
+
+# Installation
+
+```bash
+git clone https://github.com/yourusername/smart-v2v-link-selection.git
+cd smart-v2v-link-selection
+pip install -r requirements.txt
+```
+
+---
+
+# How to Run
+
+### Train Random Forest
+
+```bash
+python src/train_random_forest.py
+```
+
+---
+
+### Train XGBoost
+
+```bash
+python src/train_xgboost.py
+```
+
+---
+
+### Train MLP
+
+```bash
+python src/train_mlp.py
+```
+
+---
+
+### Evaluate Models
+
+```bash
+python src/evaluate.py
+```
+
+---
+
+### Run Demo
+
+```bash
+streamlit run demo/app.py
+```
+
+---
+
+# Repository Structure
+
+```bash
+smart-v2v-link-selection/
+│
+├── data/
+├── dataset_generation/
+├── notebooks/
+├── src/
+├── docs/
+├── results/
+├── demo/
+├── examples/
+├── README.md
+```
+
+---
+
+# Why This Project Stands Out
+
+This project combines:
+
+- Wireless Communication Engineering  
+- Machine Learning  
+- Optimization Algorithms  
+- Real-world Environmental Modeling  
+- Deployment using Streamlit  
+
+Unlike traditional ML projects, this project solves a real communication systems problem with both engineering depth and practical deployment.
+
+---
+
+# Applications
+
+- Autonomous Vehicles  
+- V2V Communication  
+- Smart Cities  
+- Intelligent Transportation Systems  
+- 6G Vehicular Networks  
+
+---
+
+# Future Work
+
+- Reinforcement Learning  
+- Real-world vehicular datasets  
+- Edge deployment  
+- 6G integration  
+- IoT integration  
+
+---
+
+# Resume Impact Statement
+
+Built an intelligent vehicular communication framework that dynamically selects RF, VLC, and Hybrid links using machine learning, utility optimization, and weather-aware channel modeling, improving network utility by **112.1%** while achieving **89.46% accuracy**.
+
+---
+
+# Author
+
+**Tejas Kondhalkar**  
+Electronics and Communication Engineering  
+Faculty of Technology, University of Delhi  
+
+LinkedIn: https://www.linkedin.com/in/tejas-vilas-kondhalkar-98a9b41b1  
+
+Email: tejasvilas04@gmail.com
+
+---
+
+# License
+
+MIT License
