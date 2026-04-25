@@ -7,6 +7,8 @@
 ![Streamlit](https://img.shields.io/badge/Deployment-Streamlit-red)
 ![Research](https://img.shields.io/badge/IEEE-Research%20Project-purple)
 
+📄 **Full Research Paper Available in [/research](research/RF_VLC_HYBRID_LINK_SELECTION.pdf)**
+
 ---
 
 ## Project Overview
@@ -377,7 +379,12 @@ smart-v2v-link-selection/
 ├── results/
 ├── demo/
 ├── examples/
-├── README.md
+├── research/
+│   ├── RF_VLC_HYBRID_LINK_SELECTION.pdf
+│   ├── ieee_paper.tex
+│   ├── references.md
+│   └── formulas.md
+└── README.md
 ```
 
 ---
@@ -419,6 +426,20 @@ Unlike traditional ML projects, this project solves a real communication systems
 # Resume Impact Statement
 
 Built an intelligent vehicular communication framework that dynamically selects RF, VLC, and Hybrid links using machine learning, utility optimization, and weather-aware channel modeling, improving network utility by **112.1%** while achieving **89.46% accuracy**.
+
+---
+
+# Research Paper
+
+This repository includes a complete IEEE-style research paper covering the theoretical and experimental foundations of this project:
+
+- **System Architecture:** Detailed breakdown of the hybrid V2V communication stack.
+- **Mathematical Modeling:** Physics-based derivation of RF and VLC channel models.
+- **Utility Optimization:** Multi-objective function design for link selection.
+- **Machine Learning Pipeline:** Comparative analysis of ensemble methods.
+- **Experimental Analysis:** Performance evaluation across diverse environmental scenarios.
+
+[View Full Research Paper (PDF)](research/RF_VLC_HYBRID_LINK_SELECTION.pdf)
 
 ---
 
