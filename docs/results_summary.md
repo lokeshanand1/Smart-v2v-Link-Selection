@@ -23,7 +23,6 @@ This document summarizes the key findings and visualizations derived from the Ma
 |---|---|---|---|---|
 | **Random Forest** | 89.4% | High | High | High |
 | **XGBoost** | 88.7% | High | High | High |
-| **MLP Classifier** | 87.2% | Med | Med | Med |
 | **Hybrid (RF+XGB)** | **89.5%** | **Highest** | **Highest** | **Highest** |
 
 The Hybrid (RF+XGBoost) approach, utilizing a distance-based threshold strategy, slightly outperforms standalone models by capitalizing on RF's strength in short-range localized feature variance and XGBoost's robustness in long-range gradient degradation.

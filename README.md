@@ -226,7 +226,6 @@ Where:
 - Random Forest  
 - Decision Tree  
 - XGBoost  
-- MLP Neural Network  
 - Hybrid RF + XGBoost model  
 
 ---
@@ -345,14 +344,6 @@ python src/train_random_forest.py
 
 ```bash
 python src/train_xgboost.py
-```
-
----
-
-### Train MLP
-
-```bash
-python src/train_mlp.py
 ```
 
 ---
