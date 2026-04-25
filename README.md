@@ -445,7 +445,8 @@ This repository includes a complete IEEE-style research paper covering the theor
 
 # Author
 
-**Tejas Kondhalkar**  
+Group Members:
+- Tejas Kondhalkar
 Electronics and Communication Engineering  
 Faculty of Technology, University of Delhi  
 
