@@ -1,0 +1,23 @@
+# Python environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Streamlit
+.streamlit/
+
+# Models
+# Ignored for reproducibility - generate these using src/ training scripts.
+*.pkl
+models/*.pkl
+
+# OS files
+.DS_Store
+Thumbs.db
