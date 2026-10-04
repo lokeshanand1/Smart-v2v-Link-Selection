@@ -414,9 +414,14 @@ This repository includes a complete IEEE-style research paper covering the theor
 
 ---
 
-# Author
+# Authors
 
-**Group Members:**
+Tejas Vilas Kondhalkar
+Alok Singh Yadav 
+Lokesh
+Amit Yadav
+
+
 - ------------------  
 Electronics and Communication Engineering  
 Faculty of Technology, University of Delhi  
