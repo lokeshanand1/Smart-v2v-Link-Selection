@@ -416,10 +416,10 @@ This repository includes a complete IEEE-style research paper covering the theor
 
 # Authors
 
-Tejas Vilas Kondhalkar
-Alok Singh Yadav 
-Lokesh
-Amit Yadav
+Tejas Vilas Kondhalkar,
+Alok Singh Yadav ,
+Lokesh,
+Amit Yadav,
 
 
 - ------------------  
